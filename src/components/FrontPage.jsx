@@ -14,9 +14,10 @@ const FrontPage = () => {
 
     const navigate = useNavigate();
 
-    const openRecipePage = () => {
-        navigate('/recipe');
-      };
+    const openRecipePage = (recipeName) => {
+        navigate(`/recipe/${recipeName}`);
+    };
+
     return (
         <div
             className="p-5  border border-transparent rounded w-screen h-screen bg-cover bg-center"
@@ -24,7 +25,7 @@ const FrontPage = () => {
         >
             {/*Name and profile icon*/}
             <div className="rounded m-4 flex items-center">
-            <button className="border border-transparent shadow rounded-xl p-4 bg-gray-200"></button>
+                <button className="border border-transparent shadow rounded-xl p-4 bg-gray-200"></button>
                 <h1 className="text-2xl text-white p-2">Hello, Mukesh</h1>
             </div>
 
@@ -71,7 +72,9 @@ const FrontPage = () => {
                 <div className="flex justify-between mt-6 m-10 pt-20">
 
                     {/*Butter Chicken*/}
-                    <button onClick={openRecipePage} className="static mr-8 p-4 border border-transparent rounded-2xl bg-gray-200 w-60 h-50 relative flex flex-col items-center justify-between shadow-lg">
+                    <button
+                        onClick={() => openRecipePage('Butter Chicken')}
+                        className="static mr-8 p-4 border border-transparent rounded-2xl bg-gray-200 w-60 h-50 relative flex flex-col items-center justify-between shadow-lg">
                         {/* Image */}
                         <div className="absolute -top-12 w-36 h-36 rounded-full overflow-hidden shadow-md">
                             <img
@@ -89,7 +92,7 @@ const FrontPage = () => {
                     </button>
 
                     {/*Classic Greek Salad*/}
-                    <button className="mr-8 p-4 border border-transparent rounded-2xl bg-gray-200 w-64 h-60 relative flex flex-col items-center justify-between shadow-lg">
+                    <button onClick={()=>openRecipePage('Greek Salad')} className="mr-8 p-4 border border-transparent rounded-2xl bg-gray-200 w-64 h-60 relative flex flex-col items-center justify-between shadow-lg">
                         {/* Image */}
                         <div className="absolute -top-12 w-36 h-36 rounded-full overflow-hidden shadow-md">
                             <img
@@ -100,14 +103,14 @@ const FrontPage = () => {
                         </div>
                         {/* Text */}
                         <div className="pt-4 mt-20 flex flex-col items-center">
-                            <span className="text-lg font-semibold">Classic Greek Salad</span>
+                            <span className="text-lg font-semibold">Greek Salad</span>
                             <span className="text-sm text-gray-500">Time: 20 Mins</span>
                             <div className="text-yellow-500 text-sm font-semibold">★ 4.8</div>
                         </div>
                     </button>
 
                     {/*Steak*/}
-                    <button className="mr-8 p-4 border border-transparent rounded-2xl bg-gray-200 w-64 h-60 relative flex flex-col items-center justify-between shadow-lg">
+                    <button onClick={()=>openRecipePage('Steak')} className="mr-8 p-4 border border-transparent rounded-2xl bg-gray-200 w-64 h-60 relative flex flex-col items-center justify-between shadow-lg">
                         {/* Image */}
                         <div className="absolute -top-12 w-36 h-36 rounded-full overflow-hidden shadow-md">
                             <img
@@ -125,7 +128,7 @@ const FrontPage = () => {
                     </button>
 
                     {/*Chow Mein*/}
-                    <button className="mr-8 p-4 border border-transparent rounded-2xl bg-gray-200 w-64 h-60 relative flex flex-col items-center justify-between shadow-lg">
+                    <button onClick={()=> openRecipePage('Chow Mein')} className="mr-8 p-4 border border-transparent rounded-2xl bg-gray-200 w-64 h-60 relative flex flex-col items-center justify-between shadow-lg">
                         {/* Image */}
                         <div className="absolute -top-12 w-36 h-36 rounded-full overflow-hidden shadow-md">
                             <img
@@ -143,7 +146,7 @@ const FrontPage = () => {
                     </button>
 
                     {/*Alfredo Pasta*/}
-                    <button className="mr-8 p-4 border border-transparent rounded-2xl bg-gray-200 w-64 h-60 relative flex flex-col items-center justify-between shadow-lg">
+                    <button onClick={()=>openRecipePage('Alfredo Pasta')} className="mr-8 p-4 border border-transparent rounded-2xl bg-gray-200 w-64 h-60 relative flex flex-col items-center justify-between shadow-lg">
                         {/* Image */}
                         <div className="absolute -top-12 w-36 h-36 rounded-full overflow-hidden shadow-md">
                             <img
@@ -161,7 +164,7 @@ const FrontPage = () => {
                     </button>
 
                     {/*Burrito*/}
-                    <button className="mr-8 p-4 border border-transparent rounded-2xl bg-gray-200 w-64 h-60 relative flex flex-col items-center justify-between shadow-lg">
+                    <button onClick={()=>openRecipePage('Burrito')} className="mr-8 p-4 border border-transparent rounded-2xl bg-gray-200 w-64 h-60 relative flex flex-col items-center justify-between shadow-lg">
                         {/* Image */}
                         <div className="absolute -top-12 w-36 h-36 rounded-full overflow-hidden shadow-md">
                             <img

@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from 'react-router-dom';
 
 const Recipe = () => {
+  const { recipeName } = useParams();
   const [ingredients, setIngredients] = useState([]);
   const [servings, setServings] = useState(null); // To store the number of servings
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   const apiKey = "f246fac710b247628c0d0d1bd85434fe"; // Replace with your Spoonacular API key
-  const recipeName = "butter chicken";
+  
 
   // Function to fetch ingredients and servings
   async function fetchIngredients() {
@@ -53,13 +55,14 @@ const Recipe = () => {
   }, []);
 
   return (
-    <div>
-      <h1>Butter Chicken</h1>
+    <div className="text-center">
+      <h1>Recipe: {recipeName}</h1>
       {loading && <p>Loading ingredients...</p>}
       {error && <p style={{ color: "red" }}>Error: {error}</p>}
       {!loading && !error && (
-        <div>
+        <div className="text-center">
           <p><strong>Servings:</strong> {servings}</p>
+          <p className="text-xl font-bold">Make recipe with the choice of your ingridients</p>
 
           {ingredients.map((ingredient, index) => (
             <div key={index} className="flex items-center space-x-2">
@@ -78,6 +81,7 @@ const Recipe = () => {
 
         </div>
       )}
+      <button className="border p-3">Cook</button>
     </div>
   );
 };
