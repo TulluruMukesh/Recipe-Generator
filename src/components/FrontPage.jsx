@@ -13,10 +13,41 @@ import burrito from "../images/Burrito.jpg"
 const FrontPage = () => {
 
     const navigate = useNavigate();
+    const [query, setQuery] = React.useState("");
+    const [suggestions, setSuggestions] = React.useState([]);
 
     const openRecipePage = (recipeName) => {
         navigate(`/recipe/${recipeName}`);
     };
+
+    const fetchRecipes = async (input) => {
+        if (input.trim().length > 1) { // Prevent API calls for empty spaces
+            const apiKey = 'f246fac710b247628c0d0d1bd85434fe'; // Replace with your API key
+            const url = `https://api.spoonacular.com/recipes/search?query=${input}&number=5&apiKey=${apiKey}`;
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+                if (data && data.results) {
+                    setSuggestions(data.results);
+                } else {
+                    setSuggestions([]); // Ensure it's always an array
+                }
+            } catch (error) {
+                console.error("Error fetching recipes:", error);
+                setSuggestions([]); // Reset suggestions on error
+            }
+        } else {
+            setSuggestions([]); // Reset suggestions for invalid input
+        }
+    };
+    
+    
+    const handleInputChange = (e) => {
+        const value = e.target.value;
+        setQuery(value);
+        fetchRecipes(value);
+    };
+    
 
     return (
         <div
@@ -31,22 +62,19 @@ const FrontPage = () => {
 
             {/*Search Bar and filter*/}
             <div className="m-4 flex justify-center">
-                <input
-                    className="border border-gray-300 rounded-full p-2 w-1/3 text-center"
-                    placeholder="Search Recipe"
-                />
+                <div className="relative w-1/3">
+                <input className="border border-gray-300 rounded-full p-2 w-full text-center" placeholder="Search Recipe" value={query} onChange={handleInputChange} /> {suggestions.length > 0 && ( <ul className="absolute w-full border border-gray-300 bg-white rounded-md shadow-lg mt-2"> {suggestions.map((suggestion) => ( <li key={suggestion.id} className="p-2 hover:bg-gray-200 cursor-pointer" onClick={() => openRecipePage(suggestion.title)} > {suggestion.title} </li> ))} </ul> )} </div>
                 <button
                     className="m-3 border p-1 border-transparent rounded text-white"
                     style={{
                         backgroundImage: `url(${filter2})`,
                         backgroundSize: "cover",
                         backgroundPosition: "center",
-                        color: "white", // Ensure text is visible
-                        width: "45px", // Adjust size
+                        color: "white",
+                        width: "45px",
                         height: "40px",
                     }}
-                >
-                </button>
+                ></button>
             </div>
 
             {/*List of Cuisine*/}
